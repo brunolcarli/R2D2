@@ -19,7 +19,7 @@ First of all you will have to make an account on [Discord developers portal](htt
 TOKEN=iuagdsucfdshgfujsfiukshdfiosgduyfhsiuhjfnsiudhfgs
 ```
 
-Engage your python virtual environment and install the reuirements
+Engage your python virtual environment and install the requirements
 
 ```
 make install
