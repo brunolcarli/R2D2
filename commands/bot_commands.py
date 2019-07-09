@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import discord
 from discord.ext import commands
 from decouple import config
@@ -34,7 +35,9 @@ async def quote(bot, *phrase):
     '''
     if phrase:
         message = ' '.join(word for word in phrase)
-        payload = get_quote_mutation(message)
+
+        # A mensagem enviada é uma string hexadecimal
+        payload = get_quote_mutation(message.encode('utf-8').hex())
 
         headers = {
             'content-type': "application/json"
@@ -42,7 +45,12 @@ async def quote(bot, *phrase):
         
         response = requests.request("POST", LISA_URL, data=payload, headers=headers)
         response = json.loads(response.text)
-        response = response['data']['createR2Quote'].get('response')
+
+        try:
+            response = response['data']['createR2Quote'].get('response')
+            response = bytes.fromhex(response).decode('utf-8')
+        except:
+            response = 'Ops algo de errado aconteceu... Bip Bip'
 
     else:
         response = 'Insira alguma mensagem!'
@@ -62,9 +70,15 @@ async def random_quote(bot):
 
     response = requests.request("POST", LISA_URL, data=payload, headers=headers)
     response = json.loads(response.text)
-    quotes = response['data'].get('r2Quotes')
+    try:
+        quotes = response['data'].get('r2Quotes')
+    except:
+        bot_response = 'Ops algo deu errado Bip Bop...'
+    else:
+        chosen_quote = choice(quotes)
+        bot_response = bytes.fromhex(chosen_quote).decode('utf-8')
 
-    await bot.send(choice(quotes))
+    await bot.send(bot_response)
 
 @client.command()
 async def remember(bot):
