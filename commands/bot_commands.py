@@ -13,7 +13,7 @@ from discord.ext import commands
 from decouple import config
 import requests
 from commands.queries import get_quote_mutation
-from settings import LISA_URL
+from settings import LISA_URL, GENERAL_CHANNEL
 
 
 client = commands.Bot(command_prefix='r2/')
@@ -21,7 +21,11 @@ client = commands.Bot(command_prefix='r2/')
 
 @client.event
 async def on_member_join(member):
-    print('Member joined')
+    """
+    Sends a welcome message when a new user comes at the server.
+    """
+    channel = client.get_channel(GENERAL_CHANNEL)
+    await channel.send('\n\n```BEM VINDO```\n\n```WELCOME```\n\n')
 
 
 @client.event
