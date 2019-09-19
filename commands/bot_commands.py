@@ -24,6 +24,7 @@ async def on_member_join(member):
     """
     Sends a welcome message when a new user comes at the server.
     """
+    # TODO melhorar essa mensagemd e boas vindas com um embedding bem bonito
     channel = client.get_channel(GENERAL_CHANNEL)
     await channel.send('\n\n```BEM VINDO```\n\n```WELCOME```\n\n')
 
