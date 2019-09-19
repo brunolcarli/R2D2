@@ -6,12 +6,12 @@ do bot.
 English: Main command module. Here will be stacked all the commands the bot
 has.
 """
+import json
+from random import choice
 import discord
 from discord.ext import commands
 from decouple import config
 import requests
-import json
-from random import choice
 from commands.queries import get_quote_mutation
 from settings import LISA_URL
 
