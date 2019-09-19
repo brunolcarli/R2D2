@@ -13,6 +13,10 @@ from settings import LISA_URL
 client = commands.Bot(command_prefix='r2/')
 
 @client.event
+async def on_member_join(member):
+    print('Member joined')
+
+@client.event
 async def on_ready():
     print("BIP BIP READY!")
 
