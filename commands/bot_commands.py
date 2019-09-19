@@ -9,20 +9,23 @@ from commands.queries import get_quote_mutation
 from settings import LISA_URL
 
 
-
 client = commands.Bot(command_prefix='r2/')
+
 
 @client.event
 async def on_member_join(member):
     print('Member joined')
 
+
 @client.event
 async def on_ready():
     print("BIP BIP READY!")
 
+
 @client.command()
 async def ping(bot):
     await bot.send('bip pong')
+
 
 @client.command()
 async def repo(bot, repo_name=''):
@@ -31,6 +34,7 @@ async def repo(bot, repo_name=''):
     '''
     repo_url = config('GITLAB_REPO') + '/{}'.format(repo_name)
     await bot.send(repo_url)
+
 
 @client.command()
 async def quote(bot, *phrase):
@@ -62,6 +66,7 @@ async def quote(bot, *phrase):
 
     await bot.send(response)
 
+
 @client.command()
 async def random_quote(bot):
     '''
@@ -83,6 +88,7 @@ async def random_quote(bot):
         bot_response = bytes.fromhex(chosen_quote).decode('utf-8')
 
     await bot.send(bot_response)
+
 
 @client.command()
 async def remember(bot):
