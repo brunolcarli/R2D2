@@ -1,4 +1,11 @@
 # -*- coding: utf-8 -*-
+"""
+PT-Br: Módulo de comandos do Bot, aqui concentram-se os comandos principais
+do bot.
+
+English: Main command module. Here will be stacked all the commands the bot
+has.
+"""
 import discord
 from discord.ext import commands
 from decouple import config
