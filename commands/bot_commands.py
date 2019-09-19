@@ -24,54 +24,62 @@ async def on_ready():
 
 @client.command()
 async def ping(bot):
-    await bot.send('bip pong')
+    """
+    Pings the bot to tests its execution.
+    """
+    await bot.send('bip pong...')
 
 
 @client.command()
 async def repo(bot, repo_name=''):
-    '''
+    """
     Returns the link to civil cultural gitlab repository.
-    '''
+    """
     repo_url = config('GITLAB_REPO') + '/{}'.format(repo_name)
     await bot.send(repo_url)
 
 
 @client.command()
 async def quote(bot, *phrase):
-    '''
+    """
     Saves a quoted message to be forever remembered.
-    '''
-    if phrase:
-        message = ' '.join(word for word in phrase)
+    """
+    if not phrase:
+        await bot.send(
+            'Insira alguma mensagem!\nEx:\n\n```r2/quote foo baz```'
+        )
+        return
 
-        # A mensagem enviada é uma string hexadecimal
-        payload = get_quote_mutation(message.encode('utf-8').hex())
+    message = ' '.join(word for word in phrase)
 
-        headers = {
-            'content-type': "application/json"
-        }
-        
-        response = requests.request("POST", LISA_URL, data=payload, headers=headers)
-        response = json.loads(response.text)
+    # A mensagem enviada é uma string hexadecimal
+    payload = get_quote_mutation(message.encode('utf-8').hex())
 
-        try:
-            response = response['data']['createR2Quote'].get('response')
-            response = bytes.fromhex(response).decode('utf-8')
-        except:
-            response = 'Ops algo de errado aconteceu... Bip Bip'
+    headers = {
+        'content-type': "application/json"
+    }
 
-    else:
-        response = 'Insira alguma mensagem!'
-        response += '\n`r2/quote foo baz`'
+    response = requests.request(
+        'POST',
+        LISA_URL,  # TODO This API will soon be changed, get another backend
+        data=payload,
+        headers=headers
+    )
+    response = json.loads(response.text)
 
-    await bot.send(response)
+    try:
+        response = response['data']['createR2Quote'].get('response')
+        response = bytes.fromhex(response).decode('utf-8')
+    except:
+        response = 'Ops algo de errado aconteceu... Bip Bip'
+        await bot.send(response)
 
 
 @client.command()
 async def random_quote(bot):
-    '''
-    Returns a random quote
-    '''
+    """
+    Returns a random quote.
+    """
     payload = "{\"query\":\"query{\\n  r2Quotes\\n}\"}"
     headers = {
         'content-type': "application/json"
@@ -92,7 +100,7 @@ async def random_quote(bot):
 
 @client.command()
 async def remember(bot):
-    '''
-    Remembers you something important
-    '''
-    await bot.send('`LEIAM A DOCUMENTAÇÃO!`')
+    """
+    Remembers you something important.
+    """
+    await bot.send('\n\n```LEIAM A DOCUMENTAÇÃO!```')
