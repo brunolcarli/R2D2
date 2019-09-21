@@ -22,7 +22,6 @@ from utils.output_vectors import (opinions, insufficiency_recognition,
                                   offended)
 
 
-
 client = commands.Bot(command_prefix='r2/')
 
 
@@ -31,6 +30,9 @@ async def on_message(message):
     """
     Handler for chat event messages.
     """
+
+    # Processa os comandos do R2 primeiro
+    await client.process_commands(message)
 
     # Processa somente mensagens que não são do próprio R2D2
     if message.author.id == int(R2ID):
