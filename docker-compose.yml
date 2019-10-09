@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+
+  r2d2:
+    build: .    
+    image: r2d2:devel
+    restart: on-failure
+    container_name: r2d2_container
+    command: python main.py
+    env_file: r2d2_env
+    volumes:
+      - .:/app
+      - static_data:/app/static
+
+volumes:
+  static_data:
