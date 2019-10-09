@@ -2,10 +2,10 @@
 """
 Módulo para configurações do R2
 """
-from decouple import config
+import os
 
-
-TOKEN = config('TOKEN')
-LISA_URL = config('LISA_API')
-GENERAL_CHANNEL = config('GENERAL_CHANNEL')
-R2ID = config('R2_ID')
+TOKEN = os.environ.get('TOKEN', '')
+DESTROYER_URL = os.environ.get('STAR_DESTROYER', '')
+GENERAL_CHANNEL = os.environ.get('GENERAL_CHANNEL', '')
+R2ID = os.environ.get('R2_ID', '')
+GITLAB_REPO = os.environ.get('GITLAB_REPO', '')

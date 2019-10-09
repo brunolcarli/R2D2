@@ -10,10 +10,9 @@ import json
 from random import choice
 import discord
 from discord.ext import commands
-from decouple import config
 import requests
 from commands.queries import get_quote_mutation
-from settings import LISA_URL, GENERAL_CHANNEL, R2ID
+from settings import DESTROYER_URL, GENERAL_CHANNEL, R2ID, GITLAB_REPO
 from utils.nlp import (get_offense_level, get_the_right_answer,
                        binary_wordmatch, text_classifier,
                        basic_preprocess)
@@ -114,7 +113,7 @@ async def repo(bot, repo_name=''):
     """
     Returns the link to civil cultural gitlab repository.
     """
-    repo_url = config('GITLAB_REPO') + '/{}'.format(repo_name)
+    repo_url = GITLAB_REPO + '/{}'.format(repo_name)
     await bot.send(repo_url)
 
 
@@ -140,7 +139,7 @@ async def quote(bot, *phrase):
 
     response = requests.request(
         'POST',
-        LISA_URL,  # TODO This API will soon be changed, get another backend
+        DESTROYER_URL,
         data=payload,
         headers=headers
     )
@@ -164,7 +163,7 @@ async def random_quote(bot):
         'content-type': "application/json"
     }
 
-    response = requests.request("POST", LISA_URL, data=payload, headers=headers)
+    response = requests.request("POST", DESTROYER_URL, data=payload, headers=headers)
     response = json.loads(response.text)
     try:
         quotes = response['data'].get('r2Quotes')
