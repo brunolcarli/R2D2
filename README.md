@@ -6,7 +6,7 @@
 
 [![Generic badge](https://img.shields.io/badge/docs-blue.svg)](https://gitlab.com/civil-cultural/r2d2/wikis/home)
 
-Help Bot for Civil Cultural project.
+Help Bot
 
 </td></tr></table>
 
