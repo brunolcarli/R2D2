@@ -89,7 +89,7 @@ async def on_member_join(member):
     """
     Sends a welcome message when a new user comes at the server.
     """
-    # TODO melhorar essa mensagemd e boas vindas com um embedding bem bonito
+    # TODO melhorar essa mensagem de boas vindas com um embedding bem bonito
     channel = client.get_channel(GENERAL_CHANNEL)
     await channel.send('\n\n```BEM VINDO```\n\n```WELCOME```\n\n')
     return
@@ -106,15 +106,6 @@ async def ping(bot):
     Pings the bot to tests its execution.
     """
     await bot.send('bip pong...')
-
-
-@client.command()
-async def repo(bot, repo_name=''):
-    """
-    Returns the link to civil cultural gitlab repository.
-    """
-    repo_url = GITLAB_REPO + '/{}'.format(repo_name)
-    await bot.send(repo_url)
 
 
 @client.command()
@@ -174,11 +165,3 @@ async def random_quote(bot):
         bot_response = bytes.fromhex(chosen_quote).decode('utf-8')
 
     await bot.send(bot_response)
-
-
-@client.command()
-async def remember(bot):
-    """
-    Remembers you something important.
-    """
-    await bot.send('\n\n```LEIAM A DOCUMENTAÇÃO!```')
