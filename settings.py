@@ -2,7 +2,7 @@
 '''
 Módulo para configurações do R2
 '''
-from decouple import config
+import os
 
 
-TOKEN = config('TOKEN')
+TOKEN = os.environ.get('TOKEN')
