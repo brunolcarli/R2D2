@@ -3,3 +3,7 @@ install:
 
 run:
 	python main.py
+
+pipe:
+	make install
+	make run
